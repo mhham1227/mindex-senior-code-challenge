@@ -1,13 +1,14 @@
 package com.mindex.challenge.data;
 
-public class ReportingStructure extends Employee {
+public class ReportingStructure {
 
     private Integer numberOfReports;
+    private Employee employee;
 
     public ReportingStructure(){
     }
     public ReportingStructure(Employee employee, Integer numberOfReports) {
-        super(employee);
+        this.employee = employee;
         this.numberOfReports = numberOfReports;
     }
 
@@ -17,5 +18,13 @@ public class ReportingStructure extends Employee {
 
     public void setNumberOfReports(Integer numberOfReports) {
         this.numberOfReports = numberOfReports;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

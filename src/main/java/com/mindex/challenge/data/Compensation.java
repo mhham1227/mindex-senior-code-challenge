@@ -6,17 +6,18 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 
-public class Compensation extends Employee {
+public class Compensation {
     private static final Logger LOG = LoggerFactory.getLogger(Compensation.class);
 
+    private Employee employee;
     private Integer salary;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate effectiveDate;
 
-    public Compensation(){ }
+    public Compensation(){}
 
     public Compensation(Employee employee, Integer salary, LocalDate effectiveDate) {
-        super(employee);
+        this.employee = employee;
         this.salary = salary;
         this.effectiveDate = effectiveDate;
     }
@@ -35,5 +36,13 @@ public class Compensation extends Employee {
 
     public void setEffectiveDate(LocalDate effectiveDate) {
         this.effectiveDate = effectiveDate;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

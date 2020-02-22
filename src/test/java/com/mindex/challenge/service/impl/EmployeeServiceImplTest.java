@@ -161,21 +161,22 @@ public class EmployeeServiceImplTest {
     @Test
     public void testCompensationReadCreate(){
         Compensation testEmployee = new Compensation();
-        testEmployee.setFirstName("John");
-        testEmployee.setLastName("Doe");
-        testEmployee.setDepartment("Engineering");
-        testEmployee.setPosition("Developer");
+        testEmployee.setEmployee(new Employee());
+        testEmployee.getEmployee().setFirstName("John");
+        testEmployee.getEmployee().setLastName("Doe");
+        testEmployee.getEmployee().setDepartment("Engineering");
+        testEmployee.getEmployee().setPosition("Developer");
         testEmployee.setSalary(100000);
         testEmployee.setEffectiveDate(LocalDate.of(2020,5,10));
 
         // Create Compensation checks
         Compensation createdEmployee = restTemplate.postForEntity(employeeCompensationUrl, testEmployee, Compensation.class).getBody();
-        assertNotNull(createdEmployee.getEmployeeId());
+        assertNotNull(createdEmployee.getEmployee().getEmployeeId());
         assertCompensationEquivalence(testEmployee, createdEmployee);
 
         // Read Compensation checks
-        Compensation readEmployee = restTemplate.getForEntity(employeeCompensationIdUrl, Compensation.class, createdEmployee.getEmployeeId()).getBody();
-        assertEquals(createdEmployee.getEmployeeId(), readEmployee.getEmployeeId());
+        Compensation readEmployee = restTemplate.getForEntity(employeeCompensationIdUrl, Compensation.class, createdEmployee.getEmployee().getEmployeeId()).getBody();
+        assertEquals(createdEmployee.getEmployee().getEmployeeId(), readEmployee.getEmployee().getEmployeeId());
         assertCompensationEquivalence(createdEmployee, readEmployee);
 
 
@@ -190,7 +191,7 @@ public class EmployeeServiceImplTest {
     }
 
     private static void assertCompensationEquivalence(Compensation expected, Compensation actual) {
-        assertEmployeeEquivalence(expected, actual);
+        assertEmployeeEquivalence(expected.getEmployee(), actual.getEmployee());
 
         assertEquals(expected.getSalary(), actual.getSalary());
         assertEquals(expected.getEffectiveDate(), actual.getEffectiveDate());

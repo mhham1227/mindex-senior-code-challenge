@@ -38,24 +38,6 @@ public class EmployeeController {
         return employeeService.update(employee);
     }
 
-   @GetMapping("/employee/structure/{id}")
-    public ReportingStructure readReportingStructure(@PathVariable("id") String id){
-        LOG.debug("Received employee reporting structure request for id [{}]", id);
 
-        return employeeService.readReportingStructure(id);
-    }
 
-    @GetMapping("/employee/compensation/{id}")
-    public Compensation readCompensation(@PathVariable("id")  String id){
-        LOG.debug("Received compensation info request for [{}]", id);
-
-        return employeeService.readCompensation(id);
-    }
-
-    @PostMapping("/employee/compensation")
-    public Compensation createCompensationRequest(@RequestBody Compensation compensation) {
-        LOG.debug("Received compensation info create request for [{}]", compensation.getEmployeeId());
-
-        return employeeService.createCompensation(compensation);
-    }
 }
