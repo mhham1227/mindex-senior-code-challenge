@@ -28,11 +28,12 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
             //Get the employee information of each direct report
             for(int i =0; i <= employee.getDirectReports().size()-1; i++){
                 Employee report = employeeRepository.findByEmployeeId(employee.getDirectReports().get(i).getEmployeeId());
+
                 //Check if a direct report has more direct reports
                 if(report.getDirectReports() != null){
                     //Get the reporting structure for the report
-                    report = readReportingStructure(report.getEmployeeId()).getEmployee();
-                    numberOfReports += report.getDirectReports().size();
+                    ReportingStructure structure  = readReportingStructure(report.getEmployeeId());
+                    numberOfReports += structure.getNumberOfReports();
                 }
                 //Replace the original direct report record with the completed record
                 employee.getDirectReports().set(i, report);

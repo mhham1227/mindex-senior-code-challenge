@@ -25,12 +25,7 @@ public class CompensationServiceImpl implements CompensationService {
         Compensation compensation;
 
         //Only read compensation records
-        try{
             compensation = compensationRepository.findByEmployee_EmployeeId(id);
-        }catch (ClassCastException e){
-            //Throw exception if there was no compensation data
-            throw new RuntimeException("No compensation record for: " + id);
-        }
 
         if (compensation == null) {
             throw new RuntimeException("Invalid employeeId: " + id);
