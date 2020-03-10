@@ -33,6 +33,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
                 if(report.getDirectReports() != null){
                     //Get the reporting structure for the report
                     ReportingStructure structure  = readReportingStructure(report.getEmployeeId());
+                    report = structure.getEmployee();
                     numberOfReports += structure.getNumberOfReports();
                 }
                 //Replace the original direct report record with the completed record
